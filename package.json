@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "imazine-2-frontend",
   "private": true,
   "scripts": {
     "build": "nuxt build",
