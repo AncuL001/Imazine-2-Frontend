@@ -2,12 +2,20 @@ $accent-color: #FED555;
 
 * {
     font-family: 'Lato';
+    background-color: #F9F9F9;
 }
 
-#page-icon {
-    color: $accent-color;
+nav {
+    background-color: #FFFFFF;
+    * {
+        background-color: transparent;
+    }
+}
+
+.navbar-brand {
+    color: $accent-color !important;
     font-weight: 900;
-    font-size: 2em;
+    font-size: 1.5em !important;
     text-decoration: none;
     letter-spacing: -1px;
 }

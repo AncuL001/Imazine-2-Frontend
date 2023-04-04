@@ -1,6 +1,6 @@
 <template>
     <div>
-        <NuxtLink to="/" id="page-icon">
+        <NuxtLink to="/" class="navbar-brand">
                 IMAZINE
         </NuxtLink>
     </div>
