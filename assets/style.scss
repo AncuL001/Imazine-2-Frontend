@@ -1,0 +1,13 @@
+$accent-color: #FED555;
+
+* {
+    font-family: 'Lato';
+}
+
+#page-icon {
+    color: $accent-color;
+    font-weight: 900;
+    font-size: 2em;
+    text-decoration: none;
+    letter-spacing: -1px;
+}
