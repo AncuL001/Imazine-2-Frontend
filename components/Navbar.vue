@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand py-0">
+    <nav class="navbar navbar-expand sticky-top bg-opacity-50 py-0">
         <div class="container">
             <ImazineTitle />
             <NavbarNavs />
