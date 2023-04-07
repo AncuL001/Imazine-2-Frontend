@@ -1,5 +1,5 @@
 <template>
-    <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" to="#">
+    <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" to="/articles/1">
             <div class="rectangle col-auto"></div>
             <div class="col pe-0">
                 <div class="mb-1 d-flex">
