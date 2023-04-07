@@ -15,10 +15,10 @@
     <div class="col-2">
       <div class="content-container p-4">
         <h2>Kategori</h2>
-        <NuxtLink to="#" class="category-label-list">Category</NuxtLink>
-        <NuxtLink to="#" class="category-label-list">Category</NuxtLink>
-        <NuxtLink to="#" class="category-label-list">Category</NuxtLink>
-        <NuxtLink to="#" class="category-label-list">Category</NuxtLink>
+        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
+        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
+        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
+        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
       </div>
     </div>
   </div>
@@ -33,8 +33,5 @@
 .content-container {
     border-radius: 24px;
     background-color: white;
-    * {
-        background-color: transparent;
-    }
 }
 </style>

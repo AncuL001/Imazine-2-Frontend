@@ -1,49 +1,30 @@
 $primary: #FED555;
 
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 * {
     font-family: 'Lato';
-    background-color: #F2F2F2;
-}
-
-nav {
-    background-color: #FFFFFF;
-    * {
-        background-color: transparent;
-    }
 }
 
 h1 {
-    font-weight: 800 !important;
+    font-weight: 800;
 }
 
 h2 {
-    font-size: 1.25em !important;
-    font-weight: 800 !important;
+    font-size: 1.25em;
+    font-weight: 800;
 }
 
-.navbar-brand {
-    color: $primary !important;
-    font-weight: 900;
-    font-size: 1.5em !important;
-    text-decoration: none;
-    letter-spacing: -1px;
-}
-
-@import "../node_modules/bootstrap/scss/bootstrap";
-
-.category-label-list {
-    display: block;
+.category-label {
+    text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 0.2em;
-    text-transform: uppercase;
+}
+
+a {
     @extend .link-underline-dark;
     @extend .link-offset-2;
     @extend .link-underline-opacity-0;
     @extend .link-underline-opacity-75-hover;
-}
-
-a {
-    text-decoration: none;
-    color: black;
+    color: inherit;
 }

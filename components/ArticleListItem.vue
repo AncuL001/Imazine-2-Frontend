@@ -1,17 +1,16 @@
 <template>
-    <div class="px-4 py-0">
-        <NuxtLink class="article-list-item p-4 row align-items-center gx-5" to="#">
-                <div class="rectangle col-auto"></div>
-                <div class="col">
-                    <div class="row-auto">
-                        <span class="category-label-list text-primary">Category</span>
-                    </div>
-                    <h2 class="row-auto">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                    </h2>
+    <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" to="#">
+            <div class="rectangle col-auto"></div>
+            <div class="col">
+                <div class="row mb-1 gx-1">
+                    <div class="col-auto category-label text-primary">Category</div>
+                    <div class="col"></div>
                 </div>
-        </NuxtLink>
-    </div>
+                <h2 class="row-auto">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                </h2>
+            </div>
+    </NuxtLink>
 </template>
 
 <script>
@@ -19,12 +18,9 @@
 </script>
 
 <style lang="scss" scoped>
-* {
-    background-color: transparent;
-}
-
 .article-list-item {
     border-radius: 24px;
+    text-decoration: none;
 
     .rectangle{
         background-color: #D9D9D9;
@@ -32,19 +28,9 @@
         height: 142px;
         border-radius: 16px;
     }
-    * {
-        background-color: transparent;
-    }
 
-    col {
-        text-decoration: none;
-
-    }
     &:hover {
         background-color: #F5F5F5;
     }
 }
-
-
-
 </style>
