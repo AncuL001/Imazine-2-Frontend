@@ -1,5 +1,5 @@
 <template>
-<div class="container py-4">
+<div class="container-lg py-4">
   <div class="row align-items-start gx-4">
     <div class="col">
       <div class="content-container p-5">
@@ -12,7 +12,7 @@
         <ArticleListItem />
     </div>
     </div>
-    <div class="col-2">
+    <div class="category-card">
       <div class="content-container p-4">
         <h2>Kategori</h2>
         <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
@@ -33,5 +33,9 @@
 .content-container {
     border-radius: 24px;
     background-color: white;
+}
+
+.category-card {
+  width: 200px;
 }
 </style>
