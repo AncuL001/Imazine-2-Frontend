@@ -1,10 +1,11 @@
 <template>
     <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" to="#">
             <div class="rectangle col-auto"></div>
-            <div class="col">
-                <div class="row mb-1 gx-1">
-                    <div class="col-auto category-label text-primary">Category</div>
-                    <div class="col"></div>
+            <div class="col pe-0">
+                <div class="mb-1 d-flex">
+                    <span class="category-label text-primary">Category</span>
+                    <div class="vr mx-2"></div>
+                    <span>3 hari yang lalu</span>
                 </div>
                 <h2 class="row-auto">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit
