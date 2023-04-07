@@ -7,7 +7,7 @@
                     <div class="col"></div>
                 </div>
                 <h2 class="row-auto">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
                 </h2>
             </div>
     </NuxtLink>
