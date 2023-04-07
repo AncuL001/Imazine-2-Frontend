@@ -10,3 +10,9 @@
 <script setup>
 
 </script>
+
+<style lang="scss" scoped>
+nav {
+    background-color: #FFFFFF;
+}
+</style>
