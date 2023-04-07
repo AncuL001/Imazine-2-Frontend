@@ -10,7 +10,7 @@
         <ArticleListItem />
         <ArticleListItem />
         <ArticleListItem />
-    </div>
+      </div>
     </div>
     <div class="category-card">
       <div class="content-container p-4">
@@ -30,11 +30,6 @@
 </script>
 
 <style lang="scss" scoped>
-.content-container {
-    border-radius: 24px;
-    background-color: white;
-}
-
 .category-card {
   width: 200px;
 }
