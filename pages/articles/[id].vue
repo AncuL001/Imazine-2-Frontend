@@ -1,5 +1,4 @@
 <template>
-<div class="container-lg py-4">
     <div class="content-container p-5">
         <div class="mx-auto mb-4 rectangle-wrapper">
             <div class="rectangle"></div>
@@ -34,7 +33,6 @@
             </p>
         </article>
     </div>
-</div>
 </template>
 
 <script setup lang="ts">

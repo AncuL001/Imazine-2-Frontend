@@ -1,7 +1,9 @@
 <template>
     <body>
         <Navbar/>
-        <slot/>
+        <div class="container-lg py-4">
+            <slot/>
+        </div>
     </body>
 </template>
 

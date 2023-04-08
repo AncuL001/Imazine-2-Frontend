@@ -1,5 +1,4 @@
 <template>
-<div class="container-lg py-4">
   <div class="row align-items-start gx-4">
     <div class="col">
       <div class="content-container p-5">
@@ -22,7 +21,6 @@
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script setup>
