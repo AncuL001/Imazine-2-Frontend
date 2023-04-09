@@ -5,8 +5,8 @@
                 Admin
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><NuxtLink class="dropdown-item" to="#">Manage Users</NuxtLink></li>
-                <li><NuxtLink class="dropdown-item" to="#">Manage Categories</NuxtLink></li>
+                <li><NuxtLink class="dropdown-item" to="/admin/manage-users">Manage Users</NuxtLink></li>
+                <li><NuxtLink class="dropdown-item" to="/admin/manage-categories">Manage Categories</NuxtLink></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
