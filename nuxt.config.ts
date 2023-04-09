@@ -4,7 +4,8 @@ export default defineNuxtConfig({
     '@nuxtjs/google-fonts',
   ],
   plugins: [
-    '@/plugins/bootstrap.client.ts'
+    '@/plugins/bootstrap.client.ts',
+    '@/plugins/markdown-it.client.ts'
   ],
   googleFonts: {
     download: true,
@@ -14,5 +15,6 @@ export default defineNuxtConfig({
   },
   css: [
     '@/assets/style.scss',
+    "@/node_modules/bootstrap-icons/font/bootstrap-icons.scss"
   ],
 })
