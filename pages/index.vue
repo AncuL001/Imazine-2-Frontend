@@ -5,10 +5,10 @@
         <h1 class="pb-4">
             Berita Terbaru
         </h1>
-        <ArticleListItem />
-        <ArticleListItem />
-        <ArticleListItem />
-        <ArticleListItem />
+        <ArticleListCard />
+        <ArticleListCard />
+        <ArticleListCard />
+        <ArticleListCard />
       </div>
     </div>
     <div class="category-card">
