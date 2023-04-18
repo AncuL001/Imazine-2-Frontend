@@ -14,7 +14,7 @@
                 Creator
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><NuxtLink class="dropdown-item" to="#">Manage Articles</NuxtLink></li>
+                <li><NuxtLink class="dropdown-item" to="/creator/manage-articles">Manage Articles</NuxtLink></li>
             </ul>
         </li>
         <li class="nav-item dropdown">
