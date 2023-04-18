@@ -1,37 +1,41 @@
 <template>
-    <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" to="/articles/1">
-            <div class="rectangle col-auto"></div>
-            <div class="col pe-0">
-                <div class="mb-1 d-flex">
-                    <span class="category-label text-primary">Category</span>
-                    <div class="vr mx-2"></div>
-                    <span>3 hari yang lalu</span>
+    <div class="row mx-0 article-list-item mb-2" style="overflow: hidden;">
+        <NuxtLink :to="`/articles/${article.id}`" class="d-flex col justify-content-between py-1">
+            <div>
+                <div class="fw-bold">
+                    {{ article.title }}
                 </div>
-                <h2 class="row-auto">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </h2>
+                <div>
+                    {{ article.author.name }}
+                </div>
             </div>
-    </NuxtLink>
+            <div class="my-auto">
+                {{ article.createdAt }}
+            </div>
+        </NuxtLink>
+        <div class="action-bar col-auto px-2">
+            <NuxtLink :to="`#`" class="bi-pencil-fill text-white"></NuxtLink>
+            <NuxtLink :to="`#`" class="bi-trash-fill text-white"></NuxtLink>
+        </div>
+    </div>
 </template>
 
-<script>
-
+<script setup>
+    const { article } = defineProps(['article'])
 </script>
 
 <style lang="scss" scoped>
 .article-list-item {
-    border-radius: 24px;
-    text-decoration: none;
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
 
-    .rectangle{
-        background-color: #D9D9D9;
-        width: 212px;
-        height: 142px;
-        border-radius: 16px;
-    }
-
-    &:hover {
-        background-color: #F5F5F5;
+    .action-bar {
+        background-color: #FED555;
+        display: flex;
+        flex-flow: column wrap; 
+        justify-content: center;
     }
 }
 </style>
