@@ -16,8 +16,8 @@
                     <h2 class="my-auto">
                         Daftar Artikel
                     </h2>
-                    <NuxtLink class="btn btn-primary btn-sm text-white">
-                        <span class="bi-plus-lg me-1"></span> Artikel</NuxtLink>
+                    <NuxtLink :to="`/creator/articles/new?category-id=${currentCategory.id}`" class="btn btn-primary btn-sm text-white">
+                        <span class="bi-plus-lg me-1"></span>Artikel</NuxtLink>
                 </div>
                 <input class="form-control mb-3" list="newUserOptions" placeholder="Cari artikel...">
 
@@ -35,6 +35,9 @@
 const categories  = [
     { id: 1, name: 'category1' },
 ]
+
+const currentCategory =
+    { id: 1, name: 'category1' }
 
 const articles = [
     {
