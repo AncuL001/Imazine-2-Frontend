@@ -1,5 +1,5 @@
 <template>
-    <div class="row mx-0 article-list-item mb-2" style="overflow: hidden;">
+    <div class="row mx-0 article-list-item overflow-hidden mb-2">
         <NuxtLink :to="`/articles/${article.id}`" class="d-flex col justify-content-between py-1">
             <div>
                 <div class="fw-bold">
