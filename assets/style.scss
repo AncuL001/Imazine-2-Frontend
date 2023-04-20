@@ -24,12 +24,36 @@ h2 {
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 0.2em;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }
 
 a {
-    @extend .link-underline-dark;
     @extend .link-offset-2;
-    @extend .link-underline-opacity-0;
-    @extend .link-underline-opacity-75-hover;
+    text-decoration: none;
     color: inherit;
+}
+
+.hl {
+    @extend .link-primary;
+    @extend .link-underline-primary;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+article {
+    line-height: 1.5em;
+
+    h1, h2, h3, h4, h5, h6 {
+        margin-top: 1.5em;
+        margin-bottom: 0.75em;
+    }
+
+    a {
+        @extend .hl;
+    }
 }

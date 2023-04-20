@@ -25,7 +25,7 @@
                     </div>
                     <textarea class="form-control mb-1" rows="10" placeholder="Konten artikel.." v-model="content"></textarea>
                     <div class="fs-6 fw-light">
-                        Note: konten di-format menggunakan <a class="link-primary" href="https://learnxinyminutes.com/docs/markdown/">Markdown</a>
+                        Note: konten di-format menggunakan <a class="hl" href="https://learnxinyminutes.com/docs/markdown/">Markdown</a>
                     </div>
                     <div class="d-flex justify-content-end">
                         <input type="submit" value="Post" class="btn btn-primary text-white">
@@ -74,22 +74,5 @@ const currentCategoryId = route.query['category-id']
 </script>
 
 <style lang="scss" scoped>
-.rectangle-wrapper {
-    box-sizing: border-box;
-    max-width: 85%;
-    .rectangle{
-        background-color: #D9D9D9;
-        width: 100%;
-        padding-bottom: 56.25%;
-        border-radius: 16px;
-    }
-}
-article {
-    line-height: 1.75em;
 
-    h1, h2, h3, h4, h5, h6 {
-        margin-top: 1.5em;
-        margin-bottom: 0.75em;
-    }
-}
 </style>

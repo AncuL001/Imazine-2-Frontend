@@ -21,7 +21,6 @@
 <style lang="scss" scoped>
 .article-list-item {
     border-radius: 24px;
-    text-decoration: none;
 
     .rectangle{
         background-color: #D9D9D9;

@@ -57,12 +57,4 @@ const convertedContent = md.render(article.content)
         border-radius: 16px;
     }
 }
-article {
-    line-height: 1.75em;
-
-    h1, h2, h3, h4, h5, h6 {
-        margin-top: 1.5em;
-        margin-bottom: 0.75em;
-    }
-}
 </style>
