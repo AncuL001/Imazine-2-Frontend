@@ -13,6 +13,21 @@
             </div>
             <div class="px-4">
                 <form action="">
+                    <img class="img-fluid img-thumbnail" :src="`${img}`" :hidden="img == ''">
+                    <div class="mb-3">
+                        <label for="cover_image" class="btn btn-secondary btn-sm d-flex">
+                            <div class="mx-auto">
+                                <span class="bi-upload me-2"></span> Cover
+                            </div>
+                        </label>
+                        <input
+                            type="file"
+                            id="cover_image"
+                            name="cover_image"
+                            accept=".jpg, .jpeg, .png"
+                            @change="previewFiles"
+                            hidden />
+                    </div>
                     <div class="row mb-3">
                         <div class="col">
                             <input type="text" class="form-control" placeholder="Judul artikel..." v-model="title">
@@ -45,19 +60,25 @@
 
 <script>
 export default {
-  data() {
-    return {
-      title: '',
-      content: '',
-      hiddenPreview: false
+    data() {
+        return {
+            title: '',
+            content: '',
+            hiddenPreview: false,
+            img: ''
+        }
+    },
+    computed: {
+        convertedContentToMarkdown() {
+            const md = new MarkdownIt;
+            return md.render(this.content)
+        }
+    },
+    methods: {
+        previewFiles(event) {
+            this.img = URL.createObjectURL(event.target.files[0])
+        }
     }
-  },
-  computed: {
-    convertedContentToMarkdown() {
-        const md = new MarkdownIt;
-        return md.render(this.content)
-    }
-  }
 }
 </script>
 
