@@ -2,6 +2,10 @@ $primary: #FED555;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 
+body {
+    background-color: #F2F2F2;
+}
+
 * {
     font-family: 'Lato';
 }
