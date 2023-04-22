@@ -1,6 +1,6 @@
 <template>
-    <div class="row align-items-start">
-        <div class="col content-container px-0 py-4 me-4">
+    <div class="row align-items-start d-flex gap-4">
+        <div class="col content-container px-0 py-4">
             <div class="d-flex justify-content-between mb-3 ps-4">
                 <h2 class="my-auto">
                     Artikel Baru
@@ -11,42 +11,42 @@
                     <span v-else class="ms-1 bi-chevron-right"></span>
                 </button>
             </div>
-            <div class="px-4">
-                <form action="">
+            <form action="" class="px-4 d-grid gap-3">
+                <div>
                     <img class="img-fluid img-thumbnail" :src="`${img}`" :hidden="img == ''">
-                    <div class="mb-3">
-                        <label for="cover_image" class="btn btn-secondary btn-sm d-flex">
-                            <div class="mx-auto">
-                                <span class="bi-upload me-2"></span> Cover
-                            </div>
-                        </label>
-                        <input
-                            type="file"
-                            id="cover_image"
-                            name="cover_image"
-                            accept=".jpg, .jpeg, .png"
-                            @change="previewFiles"
-                            hidden />
-                    </div>
-                    <div class="row mb-3">
-                        <div class="col">
-                            <input type="text" class="form-control" placeholder="Judul artikel..." v-model="title">
+                    <label for="cover_image" class="btn btn-secondary btn-sm d-flex">
+                        <div class="mx-auto">
+                            <span class="bi-upload me-2"></span> Cover
                         </div>
-                        <div class="col-auto">
-                            <select class="form-select" aria-label="Default select example">
-                                <option v-for="category in categories" :value="`${category.id}`" :selected="category.id == currentCategoryId">{{ category.name }}</option>
-                            </select>
-                        </div>
+                    </label>
+                    <input
+                        type="file"
+                        id="cover_image"
+                        name="cover_image"
+                        accept=".jpg, .jpeg, .png"
+                        @change="previewFiles"
+                        hidden />
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Judul artikel..." v-model="title">
                     </div>
-                    <textarea class="form-control mb-1" rows="10" placeholder="Konten artikel.." v-model="content"></textarea>
+                    <div class="col-auto">
+                        <select class="form-select" aria-label="Default select example">
+                            <option v-for="category in categories" :value="`${category.id}`" :selected="category.id == currentCategoryId">{{ category.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <textarea class="form-control" rows="10" placeholder="Konten artikel.." v-model="content"></textarea>
                     <div class="fs-6 fw-light">
                         Note: konten di-format menggunakan <a class="hl" href="https://learnxinyminutes.com/docs/markdown/">Markdown</a>
                     </div>
-                    <div class="d-flex justify-content-end">
-                        <input type="submit" value="Post" class="btn btn-primary text-white">
-                    </div>
-                </form>
-            </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <input type="submit" value="Post" class="btn btn-primary text-white">
+                </div>
+            </form>
         </div>
 
         <div class="col content-container p-4" :hidden="hiddenPreview">
@@ -77,6 +77,7 @@ export default {
     methods: {
         previewFiles(event) {
             this.img = URL.createObjectURL(event.target.files[0])
+            console.log(event.target.files[0])
         }
     }
 }
