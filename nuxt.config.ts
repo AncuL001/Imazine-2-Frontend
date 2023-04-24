@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/google-fonts',
+    '@sidebase/nuxt-session'
   ],
   plugins: [
     '@/plugins/bootstrap.client.ts',
@@ -17,4 +18,9 @@ export default defineNuxtConfig({
     '@/assets/style.scss',
     "@/node_modules/bootstrap-icons/font/bootstrap-icons.scss"
   ],
+  session: {
+    api: {
+      isEnabled: false
+    }
+  }
 })
