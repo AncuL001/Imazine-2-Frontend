@@ -23,14 +23,17 @@
 
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><NuxtLink class="dropdown-item" to="#">Logout</NuxtLink></li>
+                <li><span @click="logout" class="dropdown-item">Logout</span></li>
             </ul>
         </li>
     </ul>
 </template>
 
 <script setup>
-
+async function logout(event) {
+    const res = await $fetch('/api/logout', { method: 'POST'});
+    window.location.reload()
+}
 </script>
 
 <style lang="scss" scoped>

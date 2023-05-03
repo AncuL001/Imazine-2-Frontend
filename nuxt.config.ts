@@ -2,11 +2,12 @@
 export default defineNuxtConfig({
   modules: [
     '@nuxtjs/google-fonts',
-    '@sidebase/nuxt-session'
+    '@sidebase/nuxt-session',
+    '@pinia/nuxt'
   ],
   plugins: [
     '@/plugins/bootstrap.client.ts',
-    '@/plugins/markdown-it.client.ts'
+    '@/plugins/markdown-it.client.ts',
   ],
   googleFonts: {
     download: true,
@@ -20,7 +21,16 @@ export default defineNuxtConfig({
   ],
   session: {
     api: {
-      isEnabled: false
+      isEnabled: true,
+      methods: [
+        'get',
+      ]
     }
-  }
+  },
+  imports: {
+    dirs: ['./stores'],
+  },
+  pinia: {
+    autoImports: ['defineStore', 'acceptHMRUpdate'],
+  },
 })

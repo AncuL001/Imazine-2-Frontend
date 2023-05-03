@@ -6,8 +6,6 @@
 </template>
 
 <script setup>
-const n = await $fetch('/api/login', { method: 'post', body: { test: 123 } })
-console.log(n)
 </script>
 
 <style scoped>
