@@ -11,17 +11,9 @@
         <ArticleListCard />
       </div>
     </div>
-    <div class="category-card">
-      <div class="content-container p-4">
-        <h2>Kategori</h2>
-        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
-        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
-        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
-        <NuxtLink to="#" class="category-label d-block">Category</NuxtLink>
-      </div>
-    </div>
+    <HomePageCategorySidebar :categories="categories"/>
   </div>
-  <!-- using else will cause the category sidebar above to disappear (somehow) -->
+  <!-- using v-else will cause the category sidebar above to disappear (somehow) -->
   <div v-if="!isLoggedIn">
     <div class="content-container p-5">
       <h1 style="text-align: center;">
@@ -34,6 +26,11 @@
 <script setup>
 const auth = useAuth()
 const isLoggedIn = auth.isLoggedIn
+
+const categories = [
+  { id: 1, name: 'category1' },
+  { id: 2, name: 'category2' },
+]
 </script>
 
 <style lang="scss" scoped>
