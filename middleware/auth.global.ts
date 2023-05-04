@@ -10,12 +10,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   
   const auth = useAuth()
   auth.isLoggedIn = session.value?.isLoggedIn || false
-
-  console.log(!auth.isLoggedIn)
-  console.log(to.path != '/')
+  auth.user = session.value?.user || null
 
   if (!auth.isLoggedIn && to.path != '/') {
-    console.log('test')
     return navigateTo('/', { redirectCode: 401 })
   }
 

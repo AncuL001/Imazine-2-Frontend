@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand sticky-top bg-opacity-50 py-0">
         <div class="container-lg">
             <NavbarImazineTitle />
-            <ul class="navbar-nav" v-if="auth.isLoggedIn">
+            <ul class="navbar-nav" v-if="isLoggedIn">
                 <NavbarUserNavs />
             </ul>
             <ul class="navbar-nav" v-else>
@@ -14,6 +14,7 @@
 
 <script setup>
 const auth = useAuth()
+const isLoggedIn = auth.isLoggedIn
 </script>
 
 <style lang="scss" scoped>
