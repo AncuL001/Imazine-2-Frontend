@@ -1,5 +1,5 @@
 <template>
-  <div class="row align-items-start gx-4">
+  <div v-if="isLoggedIn" class="row align-items-start gx-4">
     <div class="col">
       <div class="content-container p-5">
         <h1 class="pb-4">
@@ -21,10 +21,19 @@
       </div>
     </div>
   </div>
+  <!-- using else will cause the category sidebar above to disappear (somehow) -->
+  <div v-if="!isLoggedIn">
+    <div class="content-container p-5">
+      <h1 style="text-align: center;">
+          Silakan masuk untuk melihat konten
+      </h1>
+    </div>
+  </div>
 </template>
 
 <script setup>
-
+const auth = useAuth()
+const isLoggedIn = auth.isLoggedIn
 </script>
 
 <style lang="scss" scoped>
