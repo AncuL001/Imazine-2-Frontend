@@ -1,11 +1,9 @@
 <template>
-    <ul class="navbar-nav">
         <li class="nav-item">
             <span @click="login" class="nav-link" role="button" aria-expanded="false">
                 Login
             </span>
         </li>
-    </ul>
 </template>
 
 <script setup>

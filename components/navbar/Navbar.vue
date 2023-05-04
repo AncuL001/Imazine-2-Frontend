@@ -2,12 +2,12 @@
     <nav class="navbar navbar-expand sticky-top bg-opacity-50 py-0">
         <div class="container-lg">
             <NavbarImazineTitle />
-            <span v-if="auth.isLoggedIn">
+            <ul class="navbar-nav" v-if="auth.isLoggedIn">
                 <NavbarUserNavs />
-            </span>
-            <span v-else>
+            </ul>
+            <ul class="navbar-nav" v-else>
                 <NavbarGuestNavs />
-            </span>
+            </ul>
         </div>
     </nav>
 </template>

@@ -1,5 +1,4 @@
 <template>
-    <ul class="navbar-nav">
         <li class="nav-item dropdown">
             <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Admin
@@ -26,7 +25,6 @@
                 <li><span @click="logout" class="dropdown-item">Logout</span></li>
             </ul>
         </li>
-    </ul>
 </template>
 
 <script setup>
