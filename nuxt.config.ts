@@ -20,6 +20,9 @@ export default defineNuxtConfig({
     "@/node_modules/bootstrap-icons/font/bootstrap-icons.scss"
   ],
   session: {
+    session: {
+      expiryInSeconds: 60 * 60 * 24, // 1 day
+    },
     api: {
       isEnabled: true,
       methods: [
