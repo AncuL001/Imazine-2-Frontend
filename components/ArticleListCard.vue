@@ -1,21 +1,21 @@
 <template>
-    <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" to="/articles/1">
-            <div class="rectangle col-auto"></div>
-            <div class="col pe-0">
-                <div class="mb-1 d-flex">
-                    <span class="category-label text-primary">Category</span>
-                    <div class="vr mx-2"></div>
-                    <span>3 hari yang lalu</span>
-                </div>
-                <h2 class="row-auto">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                </h2>
+    <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" :to="`/articles/${articleItem.id}`">
+        <img class="rectangle col-auto p-0" :src="`${articleItem.coverUrl}`">
+        <div class="col pe-0">
+            <div class="mb-1 d-flex">
+                <span class="category-label text-primary">{{ articleItem.category.name }}</span>
+                <div class="vr mx-2"></div>
+                <span>{{ articleItem.created_at }}</span>
             </div>
+            <h2 class="row-auto">
+                {{ articleItem.title }}
+            </h2>
+        </div>
     </NuxtLink>
 </template>
 
-<script>
-
+<script setup>
+    const { articleItem } = defineProps(['articleItem'])
 </script>
 
 <style lang="scss" scoped>
@@ -23,9 +23,9 @@
     border-radius: 24px;
 
     .rectangle{
-        background-color: #D9D9D9;
         width: 212px;
         height: 142px;
+        object-fit: object-fit;
         border-radius: 16px;
     }
 
