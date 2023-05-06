@@ -1,7 +1,7 @@
 <template>
     <div class="content-container p-5">
         <div class="mx-auto mb-4 rectangle-wrapper">
-            <div class="rectangle"></div>
+            <img class="rectangle" :src="`${article.coverUrl}`">
         </div>
         <h1 class="text-center mb-3">
             {{ article.title }}
@@ -13,7 +13,7 @@
                 </NuxtLink>
                 <div class="vr mx-2"></div>
                 <span class="text-start">
-                    3 hari yang lalu oleh 
+                    {{ createdAt }} oleh 
                     <span class="fw-bold">{{ article.author.name }}</span>
                 </span>
             </div>
@@ -27,7 +27,7 @@
 import MarkdownIt from 'markdown-it';
 
 const article = {
-    coverUrl: '',
+    coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
     title: 'Lorem ipsum dolor sit amet',
     category: {
         id: 1,
@@ -38,12 +38,15 @@ const article = {
         name: 'Author Author Author',
         npm: '140810200030'
     },
-    createdAt: '',
+    createdAt: '2023-05-06T00:35:45.238Z',
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nisl nisi scelerisque eu ultrices vitae auctor eu augue. Iaculis at erat pellentesque adipiscing commodo elit at. Turpis massa tincidunt dui ut. Sed arcu non odio euismod lacinia at. Fermentum iaculis eu non diam phasellus vestibulum lorem sed. A scelerisque purus semper eget. Risus pretium quam vulputate dignissim suspendisse in est.\n\n## Lorem Ipsum\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nisl nisi scelerisque eu ultrices vitae auctor eu augue. Iaculis at erat pellentesque adipiscing commodo elit at. Turpis massa tincidunt dui ut. Sed arcu non odio euismod lacinia at. Fermentum iaculis eu non diam phasellus vestibulum lorem sed. A scelerisque purus semper eget. Risus pretium quam vulputate dignissim suspendisse in est.\n\nCommodo nulla facilisi nullam vehicula ipsum a arcu. Tellus id interdum velit laoreet id. Arcu felis bibendum ut tristique et egestas quis ipsum suspendisse. Eget dolor morbi non arcu risus quis varius quam. Vitae tempus quam pellentesque nec nam aliquam sem et tortor. Vestibulum sed arcu non odio. Vitae sapien pellentesque habitant morbi. Cursus vitae congue mauris rhoncus aenean vel. Sit amet risus nullam eget felis eget. Libero volutpat sed cras ornare arcu dui vivamus. Sit amet mauris commodo quis imperdiet massa tincidunt nunc."
 }
 
 const md = new MarkdownIt;
 const convertedContent = md.render(article.content)
+
+const { convertDatetime } = useDatetimeConverter();
+const createdAt = convertDatetime(article.createdAt);
 </script>
 
 <style lang="scss" scoped>
@@ -51,9 +54,7 @@ const convertedContent = md.render(article.content)
     box-sizing: border-box;
     max-width: 85%;
     .rectangle{
-        background-color: #D9D9D9;
         width: 100%;
-        padding-bottom: 56.25%;
         border-radius: 16px;
     }
 }

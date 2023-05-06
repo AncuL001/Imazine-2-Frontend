@@ -34,14 +34,14 @@ const articles = [
     category: { id: 1, name: 'category1' },
     coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
     title: 'uwu uwu uwu',
-    created_at: '3 Days ago'
+    created_at: '2023-05-06T00:35:45.238Z'
   },
   {
     id: 1,
     category: { id: 1, name: 'category2' },
     coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
     title: 'uwu uwu uwu',
-    created_at: '3 Days ago' 
+    created_at: '2023-05-06T00:35:45.238Z' 
   }
 ]
 </script>

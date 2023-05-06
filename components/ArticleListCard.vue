@@ -5,7 +5,7 @@
             <div class="mb-1 d-flex">
                 <span class="category-label text-primary">{{ articleItem.category.name }}</span>
                 <div class="vr mx-2"></div>
-                <span>{{ articleItem.created_at }}</span>
+                <span>{{ createdAt }}</span>
             </div>
             <h2 class="row-auto">
                 {{ articleItem.title }}
@@ -16,6 +16,8 @@
 
 <script setup>
     const { articleItem } = defineProps(['articleItem'])
+    const { convertDatetime } = useDatetimeConverter();
+    const createdAt = convertDatetime(articleItem.created_at);
 </script>
 
 <style lang="scss" scoped>
