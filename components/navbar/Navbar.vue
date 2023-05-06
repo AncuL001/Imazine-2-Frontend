@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand sticky-top bg-opacity-50 py-0">
         <div class="container-lg">
             <NavbarImazineTitle />
-            <ul class="navbar-nav" v-if="isLoggedIn">
+            <ul class="navbar-nav" v-if="data.isLoggedIn">
                 <NavbarUserNavs />
             </ul>
             <ul class="navbar-nav" v-else>
@@ -13,8 +13,7 @@
 </template>
 
 <script setup>
-const auth = useAuth()
-const isLoggedIn = auth.isLoggedIn
+const { data } = await useFetch('/api/session')
 </script>
 
 <style lang="scss" scoped>

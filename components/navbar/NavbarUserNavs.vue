@@ -1,5 +1,5 @@
 <template>
-        <li class="nav-item dropdown my-auto" v-if="isAdmin">
+        <li class="nav-item dropdown my-auto" v-if="data.user.is_admin || false">
             <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Admin
             </span>
@@ -8,7 +8,7 @@
                 <li><NuxtLink class="dropdown-item" to="/admin/manage-categories">Manage Categories</NuxtLink></li>
             </ul>
         </li>
-        <li class="nav-item dropdown  my-auto" v-if="isCreator">
+        <li class="nav-item dropdown  my-auto" v-if="data.user.has_article_edit_access.length > 0 || false">
             <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Creator
             </span>
@@ -18,7 +18,7 @@
         </li>
         <li class="nav-item dropdown">
             <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="profile-picture" :src="`${profPicLink}`" />
+                <img class="profile-picture" :src="`${data.user.profile_picture_link}`" />
 
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -32,10 +32,7 @@ async function logout(event) {
     const res = await $fetch('/api/logout', { method: 'POST'});
     window.location.reload()
 }
-const auth = useAuth()
-const isAdmin = auth.user.is_admin || false
-const isCreator = auth.user.has_article_edit_access.length > 0 || false
-const profPicLink = auth.user.profile_picture_link
+const { data } = await useFetch('/api/session')
 </script>
 
 <style lang="scss" scoped>

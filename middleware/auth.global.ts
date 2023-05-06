@@ -8,15 +8,13 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     overwrite
   } = await useSession()
   
-  const auth = useAuth()
-  auth.isLoggedIn = session.value?.isLoggedIn || false
-  auth.user = session.value?.user || null
+  const isLoggedIn = session.value?.isLoggedIn || false
 
-  if (!auth.isLoggedIn && to.path != '/') {
+  if (!isLoggedIn && to.path != '/') {
     return navigateTo('/', { redirectCode: 401 })
   }
 
-  if (auth.isLoggedIn && to.path == '/login') {
+  if (isLoggedIn && to.path == '/login') {
     return navigateTo('/', { redirectCode: 401 })
   }
 })
