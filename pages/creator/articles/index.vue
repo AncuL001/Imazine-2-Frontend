@@ -52,7 +52,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },
     {
         id: 1,
@@ -66,7 +66,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -79,7 +79,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -92,7 +92,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -105,7 +105,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -118,7 +118,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -131,7 +131,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -144,7 +144,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -157,7 +157,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -170,7 +170,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -183,7 +183,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -196,7 +196,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -209,7 +209,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -222,7 +222,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -235,7 +235,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'Lorem ipsum dolor sit amet',
@@ -248,7 +248,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },    {
         id: 1,
         title: 'End',
@@ -261,7 +261,7 @@ const articles = [
             name: 'Author Author Author',
             npm: '140810200030'
         },
-        createdAt: '12 April 2023',
+        created_at: '2023-05-06T00:35:45.238Z',
     },
 ]
 </script>

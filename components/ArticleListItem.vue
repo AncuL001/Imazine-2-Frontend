@@ -10,7 +10,7 @@
                 </div>
             </div>
             <div class="my-auto">
-                {{ article.createdAt }}
+                {{ createdAt }}
             </div>
         </NuxtLink>
         <div class="action-bar col-auto px-2">
@@ -22,6 +22,7 @@
 
 <script setup>
     const { article } = defineProps(['article'])
+    const createdAt = new Date(article.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
 </script>
 
 <style lang="scss" scoped>
