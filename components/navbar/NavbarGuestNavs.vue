@@ -18,7 +18,7 @@
                     <label for="dropdownFormPassword">Password</label>
                     <input type="password" class="form-control" id="dropdownFormPassword" v-model="password">
                 </div>
-                <span @click="login" class="btn btn-primary">Sign in</span>
+                <span @click="login" class="btn btn-primary">Login</span>
             </div>
         </ul>
     </li>
