@@ -1,18 +1,40 @@
 export default defineEventHandler(async (event) => {
-    event.context.session.isLoggedIn = true
-    event.context.session.user = {
-        id: 'aaaaaa',
-        name: 'Fauzan Azmi Dwicahyo',
-        npm: '140810200030',
-        profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg',
-        email: 'fauzan.azmi01@gmail.com',
-        is_admin: true,
-        has_article_edit_access: [
-            {
-                'id': 1,
-                'name': 'Big Category'
-            }
-        ]
+    const body = await readMultipartFormData(event);
+
+    if (!body) return false;
+
+    const formData = new FormData()
+    formData.append('npm', body[0].data.toString())
+    formData.append('password', body[1].data.toString())
+
+    let statusCode;
+    let errorMessage;
+
+    interface APIBody {
+        message: string
+        user: any
     }
-    return event.context.session.isLoggedIn;
+
+    const response = await $fetch<APIBody>("http://127.0.0.1:8080/login", {
+        method: "POST",
+        body: formData,
+        async onResponse({ request, response, options }) {
+            statusCode = response.status
+        }
+    })
+    .catch((error) => error.data)
+
+    if (statusCode !== 200) {
+        setResponseStatus(event, 400)
+        return {
+            message: response.message,
+        }
+    }
+
+    event.context.session.isLoggedIn = true
+    event.context.session.user = response.user
+
+    return {
+        message: "Success"
+    }
 })

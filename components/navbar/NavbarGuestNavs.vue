@@ -26,17 +26,27 @@
 
 <script setup>
 async function login(event) {
-    if (npm.value == '' && password.value == '') {
-        errorMessage.value = 'NPM atau Password salah!'
-        window.document.querySelectorAll('.dropdown-menu').forEach(function(dropdown) {
-            dropdown.addEventListener('click', function(e) {
-                e.stopPropagation();
-            });
+    window.document.querySelectorAll('.dropdown-menu').forEach(function(dropdown) {
+        dropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
         });
-        return
+    });
+
+    const formData = new FormData()
+    formData.append('npm', npm.value)
+    formData.append('password', password.value)
+
+    const { data, pending, refresh, error } = await useFetch('/api/login', { 
+        method: 'POST', 
+        body: formData
+    })
+
+    if (error.value) {
+        errorMessage.value = error.value.data.message
     }
-    const res = await $fetch('/api/login', { method: 'POST' });
-    window.location.reload()
+    else {
+        window.location.reload()
+    }
 }
 
 const npm = ref('')
