@@ -8,7 +8,6 @@ export default defineEventHandler(async (event) => {
     formData.append('password', body[1].data.toString())
 
     let statusCode;
-    let errorMessage;
 
     interface APIBody {
         message: string
