@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div v-for="category in categories" :id="category.id">
-                    <NuxtLink @click="currentCategoryId.value = category.id" class="category-label d-flex gx-5">
+                    <span @click="currentCategoryId = category.id" replace class="category-label d-flex gx-5">
                         <div class="me-1">{{ category.name }}</div>
                         <div class="dropend">
                             <span class="category-control bi-pencil-fill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
@@ -28,7 +28,7 @@
                         </div>
                         <NuxtLink :to="`#${category.id}`" class="category-control bi-trash-fill">
                         </NuxtLink>
-                    </NuxtLink>
+                    </span>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
                 <h2>
                     User dengan akses edit artikel pada kategori {{ currentCategory.name }}
                 </h2>
-                <div v-for="user in articleAccessUsers">
+                <div v-for="user in currentArticleAccessUsers.users">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="row m-0">
                             <img class="circle my-auto" :src="user.profile_picture_link">
@@ -81,14 +81,52 @@ const categories  = [
     { id: 4, name: 'category4' },
 ]
 
-const currentCategory = categories.find(category => category.id == currentCategoryId.value)
+const currentCategory = ref(categories.find(category => category.id == currentCategoryId.value))
+
+watch(currentCategoryId, (newCategoryId, oldCategoryId) => {
+    currentCategory.value = categories.find(category => category.id == newCategoryId);
+});
+
 
 const articleAccessUsers = [
-    { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200030', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-    { id: 2, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-    { id: 3, name: 'Fauzan Azmi Dwicahyo', npm: '140810200032', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-    { id: 4, name: 'Fauzan Azmi Dwicahyo', npm: '140810200033', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+    { 
+        id: 1,
+        users: [
+            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200030', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+        ]
+    },
+    { 
+        id: 2,
+        users: [
+            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+            { id: 2, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+        ], 
+    },
+    { 
+        id: 3,
+        users: [
+            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+            { id: 2, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+            { id: 3, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+        ], 
+    },
+    { 
+        id: 4,
+        users: [
+            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+            { id: 2, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+            { id: 3, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+            { id: 4, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
+        ], 
+    },
 ]
+
+const currentArticleAccessUsers = ref(articleAccessUsers.find(category => category.id == currentCategoryId.value))
+
+watch(currentCategoryId, (newCategoryId, oldCategoryId) => {
+    currentArticleAccessUsers.value = articleAccessUsers.find(category => category.id == newCategoryId);
+});
+
 </script>
 
 <style lang="scss" scoped>
