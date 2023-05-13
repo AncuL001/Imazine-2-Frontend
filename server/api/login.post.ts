@@ -32,6 +32,7 @@ export default defineEventHandler(async (event) => {
 
     event.context.session.isLoggedIn = true
     event.context.session.user = response.user
+    event.context.session.apiKey = response.apiKey
 
     return {
         message: "Success"
