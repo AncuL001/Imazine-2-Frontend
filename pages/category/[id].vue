@@ -15,30 +15,26 @@
 <script setup>
 const { id } = useRoute().params
 
-const articles = [
-  {
-    id: 1,
-    category: { id: 1, name: 'category1' },
-    coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
-    title: 'uwu uwu uwu',
-    created_at: '2023-05-06T00:35:45.238Z'
+const { data } = await useFetch('/api/session')
+const apiKey = data.value.apiKey
+
+const {data: articles} = await useFetch('/articles?category=' + id, {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${apiKey}`
   },
-  {
-    id: 1,
-    category: { id: 2, name: 'category2' },
-    coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
-    title: 'uwu uwu uwu',
-    created_at: '2023-05-06T00:35:45.238Z' 
-  }
-]
+  baseURL: 'http://127.0.0.1:8080'
+})
 
-const categories = [
-  { id: 1, name: 'category1' },
-  { id: 2, name: 'category2' },
-]
+const {data: categories} = await useFetch('/categories', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${apiKey}`
+  },
+  baseURL: 'http://127.0.0.1:8080'
+})
 
-const currentCategory = categories.find(category => category.id == id)
-
+const currentCategory = categories.value.find(category => category.id == id)
 </script>
 
 <style lang="scss" scoped>

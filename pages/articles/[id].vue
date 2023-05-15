@@ -1,20 +1,20 @@
 <template>
     <div class="content-container p-5">
         <div class="mx-auto mb-4 rectangle-wrapper">
-            <img class="rectangle" :src="`${article.coverUrl}`">
+            <img class="rectangle" :src="`${article.cover_image_link}`">
         </div>
         <h1 class="text-center mb-3">
             {{ article.title }}
         </h1>
         <div class="mb-5 text-center">
             <div class="d-inline-flex">
-                <NuxtLink to="/" class="category-label text-primary">
+                <NuxtLink :to="`/category/${article.category.id}`" class="category-label text-primary">
                     {{ article.category.name }}
                 </NuxtLink>
                 <div class="vr mx-2"></div>
                 <span class="text-start">
                     {{ createdAt }} oleh 
-                    <span class="fw-bold">{{ article.author.name }}</span>
+                    <span class="fw-bold">{{ article.creator.name }}</span>
                 </span>
             </div>
         </div>
@@ -24,29 +24,26 @@
 </template>
 
 <script setup>
+const { id } = useRoute().params
+
 import MarkdownIt from 'markdown-it';
-
-const article = {
-    coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
-    title: 'Lorem ipsum dolor sit amet',
-    category: {
-        id: 1,
-        name: 'category'
-    },
-    author: {
-        id: 1,
-        name: 'Author Author Author',
-        npm: '140810200030'
-    },
-    createdAt: '2023-05-06T00:35:45.238Z',
-    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nisl nisi scelerisque eu ultrices vitae auctor eu augue. Iaculis at erat pellentesque adipiscing commodo elit at. Turpis massa tincidunt dui ut. Sed arcu non odio euismod lacinia at. Fermentum iaculis eu non diam phasellus vestibulum lorem sed. A scelerisque purus semper eget. Risus pretium quam vulputate dignissim suspendisse in est.\n\n## Lorem Ipsum\n\nLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. In nisl nisi scelerisque eu ultrices vitae auctor eu augue. Iaculis at erat pellentesque adipiscing commodo elit at. Turpis massa tincidunt dui ut. Sed arcu non odio euismod lacinia at. Fermentum iaculis eu non diam phasellus vestibulum lorem sed. A scelerisque purus semper eget. Risus pretium quam vulputate dignissim suspendisse in est.\n\nCommodo nulla facilisi nullam vehicula ipsum a arcu. Tellus id interdum velit laoreet id. Arcu felis bibendum ut tristique et egestas quis ipsum suspendisse. Eget dolor morbi non arcu risus quis varius quam. Vitae tempus quam pellentesque nec nam aliquam sem et tortor. Vestibulum sed arcu non odio. Vitae sapien pellentesque habitant morbi. Cursus vitae congue mauris rhoncus aenean vel. Sit amet risus nullam eget felis eget. Libero volutpat sed cras ornare arcu dui vivamus. Sit amet mauris commodo quis imperdiet massa tincidunt nunc."
-}
-
 const md = new MarkdownIt;
-const convertedContent = md.render(article.content)
 
 const { convertDatetime } = useDatetimeConverter();
-const createdAt = convertDatetime(article.createdAt);
+
+const { data } = await useFetch('/api/session')
+const apiKey = data.value.apiKey
+
+const {data: article} = await useFetch(`/articles/${id}`, {
+    method: 'GET',
+    headers: {
+        'Authorization': `Bearer ${apiKey}`
+    },
+    baseURL: 'http://127.0.0.1:8080'
+})
+
+const convertedContent = md.render(article.value.markdown_content)
+const createdAt = convertDatetime(article.value.created_at);
 </script>
 
 <style lang="scss" scoped>
