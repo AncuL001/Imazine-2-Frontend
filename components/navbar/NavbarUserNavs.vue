@@ -18,8 +18,8 @@
         </li>
         <li class="nav-item dropdown">
             <span class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="profile-picture" :src="`${data.user.profile_picture_link}`" />
-
+                <img v-if="hasProfPic" class="profile-picture" :src="`${data.user.profile_picture_link}`" />
+                <img v-else class="profile-picture" src="~/assets/placeholder_profile_pic.jpg" />
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><span @click="logout" class="dropdown-item">Logout</span></li>
@@ -33,6 +33,7 @@ async function logout(event) {
     window.location.reload()
 }
 const { data } = await useFetch('/api/session')
+const hasProfPic = data.value.user.profile_picture_link != ''
 </script>
 
 <style lang="scss" scoped>

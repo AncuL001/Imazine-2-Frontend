@@ -34,6 +34,9 @@
 <script setup>
 const categories  = [
     { id: 1, name: 'category1' },
+    { id: 2, name: 'category2' },
+    { id: 3, name: 'category3' },
+    { id: 4, name: 'category4' },
 ]
 
 const currentCategory =
