@@ -21,29 +21,32 @@
 </template>
 
 <script setup>
-const categories = [
-  { id: 1, name: 'category1' },
-  { id: 2, name: 'category2' },
-]
-
 const { data } = await useFetch('/api/session')
+const apiKey = data.value.apiKey
+var articles;
+var categories;
 
-const articles = [
-  {
-    id: 1,
-    category: { id: 1, name: 'category1' },
-    coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
-    title: 'uwu uwu uwu',
-    created_at: '2023-05-06T00:35:45.238Z'
-  },
-  {
-    id: 1,
-    category: { id: 1, name: 'category2' },
-    coverUrl: 'https://cdn.pixabay.com/photo/2015/02/24/15/41/wolf-647528_960_720.jpg',
-    title: 'uwu uwu uwu',
-    created_at: '2023-05-06T00:35:45.238Z' 
-  }
-]
+if (data.value.isLoggedIn){
+  const {data: articlesData} = await useFetch('/articles', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`
+      },
+      baseURL: 'http://127.0.0.1:8080'
+    })
+
+    articles = articlesData
+
+    const {data: categoriesData} = await useFetch('/categories', {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${apiKey}`
+      },
+      baseURL: 'http://127.0.0.1:8080'
+    })
+
+    categories = categoriesData
+}
 </script>
 
 <style lang="scss" scoped>

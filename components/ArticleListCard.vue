@@ -1,6 +1,6 @@
 <template>
     <NuxtLink class="article-list-item p-4 m-0 row align-items-center gx-5" :to="`/articles/${articleItem.id}`">
-        <img class="rectangle col-auto p-0" :src="`${articleItem.coverUrl}`">
+        <img class="rectangle col-auto p-0" :src="`${articleItem.cover_image_link}`">
         <div class="col pe-0">
             <div class="mb-1 d-flex">
                 <span class="category-label text-primary">{{ articleItem.category.name }}</span>
