@@ -3,10 +3,10 @@
         <div class="category-card">
             <div class="content-container p-4">
                 <h2 class="me-2">Kategori</h2>
-                <div v-for="category in categories">
-                    <NuxtLink :to="`#${category.id}`" class="category-label d-flex gx-5">
+                <div v-for="category in categories" :id="category.id">
+                    <span @click="currentCategoryId = category.id" replace class="category-label d-flex gx-5">
                         <div class="me-1">{{ category.name }}</div>
-                    </NuxtLink>
+                    </span>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
                 </div>
                 <input class="form-control mb-3" list="newUserOptions" placeholder="Cari artikel...">
 
-                <div class="overflow-y-auto" style="height: 87%">
+                <div class="overflow-y-scroll" style="height: 87%">
                     <div v-for="article in articles">
                         <ArticleListItem :article="article"/>
                     </div>
@@ -32,241 +32,29 @@
 </template>
 
 <script setup>
-const categories  = [
-    { id: 1, name: 'category1' },
-    { id: 2, name: 'category2' },
-    { id: 3, name: 'category3' },
-    { id: 4, name: 'category4' },
-]
+const { data } = await useFetch('/api/session')
+const apiKey = data.value.apiKey
 
-const currentCategory =
-    { id: 1, name: 'category1' }
+const categories = data.value.user.has_article_edit_access
+console.log(categories)
 
-const articles = [
+const currentCategoryId = ref(categories[0].id);
+const currentCategory = ref(categories.find(category => category.id == currentCategoryId.value))
+
+const { data: articles } = await useAsyncData(
+    'articles',
+    () => $fetch(`/creators/articles/${currentCategoryId.value}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        baseURL: 'http://127.0.0.1:8080'
+    }),
     {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },
-    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'Lorem ipsum dolor sit amet',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },    {
-        id: 1,
-        title: 'End',
-        category: {
-            id: 1,
-            name: 'category'
-        },
-        author: {
-            id: 1,
-            name: 'Author Author Author',
-            npm: '140810200030'
-        },
-        created_at: '2023-05-06T00:35:45.238Z',
-    },
-]
+        watch: currentCategoryId
+    }
+)
+
 </script>
 
 <style lang="scss" scoped>

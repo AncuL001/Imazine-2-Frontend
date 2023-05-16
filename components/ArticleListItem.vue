@@ -6,7 +6,7 @@
                     {{ article.title }}
                 </div>
                 <div>
-                    {{ article.author.name }}
+                    {{ article.creator.name }}
                 </div>
             </div>
             <div class="my-auto">
