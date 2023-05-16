@@ -16,7 +16,7 @@
                     <h2 class="my-auto">
                         Daftar Artikel
                     </h2>
-                    <NuxtLink :to="`/creator/articles/new?category-id=${currentCategory.id}`" class="btn btn-primary btn-sm text-white">
+                    <NuxtLink :to="`/creator/articles/new?initial-category-id=${currentCategoryId}`" class="btn btn-primary btn-sm text-white">
                         <span class="bi-plus-lg me-1"></span>Artikel</NuxtLink>
                 </div>
                 <input class="form-control mb-3" list="newUserOptions" placeholder="Cari artikel...">
@@ -36,7 +36,6 @@ const { data } = await useFetch('/api/session')
 const apiKey = data.value.apiKey
 
 const categories = data.value.user.has_article_edit_access
-console.log(categories)
 
 const currentCategoryId = ref(categories[0].id);
 const currentCategory = ref(categories.find(category => category.id == currentCategoryId.value))

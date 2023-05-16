@@ -11,9 +11,9 @@
                     <span v-else class="ms-1 bi-chevron-right"></span>
                 </button>
             </div>
-            <form action="" class="px-4 d-grid gap-3">
+            <div class="px-4 d-grid gap-3">
                 <div>
-                    <img class="img-fluid img-thumbnail" :src="`${img}`" :hidden="img == ''">
+                    <img class="img-fluid img-thumbnail" :src="`${imgUrl}`" :hidden="img == ''">
                     <label for="cover_image" class="btn btn-secondary btn-sm d-flex">
                         <div class="mx-auto">
                             <span class="bi-upload me-2"></span> Cover
@@ -32,8 +32,8 @@
                         <input type="text" class="form-control" placeholder="Judul artikel..." v-model="title">
                     </div>
                     <div class="col-auto">
-                        <select class="form-select" aria-label="Default select example">
-                            <option v-for="category in categories" :value="`${category.id}`" :selected="category.id == currentCategoryId">{{ category.name }}</option>
+                        <select v-model="categoryId" class="form-select" aria-label="Default select example">
+                            <option v-for="category in categories" :value="`${category.id}`">{{ category.name }}</option>
                         </select>
                     </div>
                 </div>
@@ -44,9 +44,9 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-end">
-                    <input type="submit" value="Post" class="btn btn-primary text-white">
+                    <button @click="createArticle" class="btn btn-primary text-white">Post</button>
                 </div>
-            </form>
+            </div>
         </div>
 
         <div class="col content-container p-4" :hidden="hiddenPreview">
@@ -65,7 +65,9 @@ export default {
             title: '',
             content: '',
             hiddenPreview: false,
-            img: ''
+            imgUrl: '',
+            img: '',
+            categoryId: useRoute().query['initial-category-id']
         }
     },
     computed: {
@@ -76,8 +78,29 @@ export default {
     },
     methods: {
         previewFiles(event) {
-            this.img = URL.createObjectURL(event.target.files[0])
-            console.log(event.target.files[0])
+            this.img = event.target.files[0]
+            this.imgUrl = URL.createObjectURL(this.img)
+        },
+        async createArticle(event) {
+            const { data } = await useFetch('/api/session')
+            const apiKey = data.value.apiKey
+
+            const formData = new FormData()
+            formData.append('title', this.title)
+            formData.append('category_id', this.categoryId)
+            formData.append('markdown_content', this.content)
+            formData.append('cover_image', this.img)
+
+            const { data: res, pending, refresh, error } = await useFetch('/articles', { 
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: formData,
+                baseURL: 'http://127.0.0.1:8080',
+            })
+
+            await navigateTo('/articles/' + res.value.id)
         }
     }
 }
@@ -86,13 +109,8 @@ export default {
 <script setup>
 import MarkdownIt from 'markdown-it';
 
-const categories = [
-    { id: 1, name: 'category1' },
-    { id: 2, name: 'category2' },
-]
-
-const route = useRoute()
-const currentCategoryId = route.query['category-id']
+const { data } = await useFetch('/api/session')
+const categories = data.value.user.has_article_edit_access
 </script>
 
 <style lang="scss" scoped>
