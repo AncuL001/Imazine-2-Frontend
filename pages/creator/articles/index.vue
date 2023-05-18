@@ -14,7 +14,7 @@
             <div class="content-container p-4 overflow-y-hidden" style="height: 100%">
                 <div class="d-flex justify-content-between mb-3">
                     <h2 class="my-auto">
-                        Daftar Artikel
+                        Daftar Artikel Kategori {{ currentCategory.name }}
                     </h2>
                     <NuxtLink :to="`/creator/articles/new?initial-category-id=${currentCategoryId}`" class="btn btn-primary btn-sm text-white">
                         <span class="bi-plus-lg me-1"></span>Artikel</NuxtLink>
@@ -40,6 +40,11 @@ const categories = data.value.user.has_article_edit_access
 const currentCategoryId = ref(categories[0].id);
 const searchQuery = ref('');
 const currentCategory = ref(categories.find(category => category.id == currentCategoryId.value))
+
+watch(currentCategoryId, (newCategoryId, oldCategoryId) => {
+    currentCategory.value = categories.find(category => category.id == newCategoryId);
+    searchQuery.value = ''
+});
 
 const { data: articles } = await useAsyncData(
     'articles',
