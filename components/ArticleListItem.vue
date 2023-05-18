@@ -15,14 +15,50 @@
         </NuxtLink>
         <div class="action-bar col-auto px-2">
             <NuxtLink :to="`#`" class="bi-pencil-fill text-white"></NuxtLink>
-            <NuxtLink :to="`#`" class="bi-trash-fill text-white"></NuxtLink>
+            <span class="bi-trash-fill text-white" data-bs-toggle="modal" :data-bs-target="`#exampleModal${article.id}`"></span>
+        </div>
+    </div>
+
+    <div class="modal fade" :id="`exampleModal${article.id}`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Konfirmasi</h5>
+                </div>
+                <div class="modal-body">
+                    Apakah benar ingin menghapus artikel {{ article.title }}?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tidak</button>
+                    <div data-bs-dismiss="modal">
+                        <button type="button" @click="deleteArticle(article.id)" class="btn btn-primary text-white">
+                            Ya
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-    const { article } = defineProps(['article'])
-    const createdAt = new Date(article.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+const { article } = defineProps(['article'])
+const createdAt = new Date(article.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+
+async function deleteArticle(articleId) {
+    const data = await $fetch('/api/session')
+    const apiKey = data.apiKey
+
+    const res = await $fetch(`/articles/${articleId}`, 
+    {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        baseURL: 'http://127.0.0.1:8080'
+    })
+    refreshNuxtData()
+}
 </script>
 
 <style lang="scss" scoped>
@@ -35,7 +71,7 @@
     .action-bar {
         background-color: #FED555;
         display: flex;
-        flex-flow: column wrap; 
+        flex-flow: column wrap;
         justify-content: center;
     }
 }
