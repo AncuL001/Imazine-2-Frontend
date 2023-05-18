@@ -14,7 +14,7 @@
             </div>
         </NuxtLink>
         <div class="action-bar col-auto px-2">
-            <NuxtLink :to="`#`" class="bi-pencil-fill text-white"></NuxtLink>
+            <NuxtLink :to="`/creator/articles/edit/${article.id}`" class="bi-pencil-fill text-white"></NuxtLink>
             <span class="bi-trash-fill text-white" data-bs-toggle="modal" :data-bs-target="`#exampleModal${article.id}`"></span>
         </div>
     </div>
