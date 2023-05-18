@@ -41,20 +41,18 @@
                     <span class="input-group-text">
                         <div class="bi-search"></div>
                     </span>
-                    <input class="form-control" list="newUserOptions" placeholder="Cari user...">
+                    <input class="form-control" list="newUserOptions" v-model="searchQuery" placeholder="Cari user...">
                     <datalist id="newUserOptions">
-                        <option value="140810200030">140810200030 Fauzan Azmi Dwicahyo</option>
-                        <option value="140810200030">140810200030 Fauzan Azmi Dwicahyo</option>
-                        <option value="140810200030">140810200030 Fauzan Azmi Dwicahyo</option>
-                        <option value="140810200030">140810200030 Fauzan Azmi Dwicahyo</option>
+                        <option v-for="user in searchUsers" :id="user.id" :value="user.id">{{ user.npm }} {{ user.name }}</option>
                     </datalist>
+                    <button @click="addUserToCategory" class="btn btn-primary text-white bi-plus-lg"></button>
                 </div>
             </div>
             <div class="content-container p-4">
                 <h2>
                     User dengan akses edit artikel pada kategori {{ currentCategory.name }}
                 </h2>
-                <div v-for="user in currentArticleAccessUsers.users">
+                <div v-for="user in currentArticleAccessUsers">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="row m-0">
                             <img class="circle my-auto" :src="user.profile_picture_link">
@@ -72,60 +70,78 @@
 </template>
 
 <script setup>
-const currentCategoryId = ref(1);
+const { data } = await useFetch('/api/session')
+const apiKey = data.value.apiKey
 
-const categories  = [
-    { id: 1, name: 'category1' },
-    { id: 2, name: 'category2' },
-    { id: 3, name: 'category3' },
-    { id: 4, name: 'category4' },
-]
+const {data: categories} = await useFetch('/categories', {
+  method: 'GET',
+  headers: {
+    'Authorization': `Bearer ${apiKey}`
+  },
+  baseURL: 'http://127.0.0.1:8080'
+})
 
-const currentCategory = ref(categories.find(category => category.id == currentCategoryId.value))
-
-watch(currentCategoryId, (newCategoryId, oldCategoryId) => {
-    currentCategory.value = categories.find(category => category.id == newCategoryId);
-});
-
-
-const articleAccessUsers = [
-    { 
-        id: 1,
-        users: [
-            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200030', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-        ]
-    },
-    { 
-        id: 2,
-        users: [
-            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-            { id: 2, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-        ], 
-    },
-    { 
-        id: 3,
-        users: [
-            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-            { id: 2, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-            { id: 3, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-        ], 
-    },
-    { 
-        id: 4,
-        users: [
-            { id: 1, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-            { id: 2, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-            { id: 3, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-            { id: 4, name: 'Fauzan Azmi Dwicahyo', npm: '140810200031', profile_picture_link: 'https://a.ppy.sh/2449200?1624766977.jpeg' },
-        ], 
-    },
-]
-
-const currentArticleAccessUsers = ref(articleAccessUsers.find(category => category.id == currentCategoryId.value))
+const currentCategoryId = ref(categories.value[0].id);
+const searchQuery = ref('');
+const currentCategory = ref(categories.value.find(category => category.id == currentCategoryId.value))
 
 watch(currentCategoryId, (newCategoryId, oldCategoryId) => {
-    currentArticleAccessUsers.value = articleAccessUsers.find(category => category.id == newCategoryId);
+    currentCategory.value = categories.value.find(category => category.id == newCategoryId);
+    searchQuery.value = ''
 });
+
+const { data: searchUsers } = await useAsyncData(
+    'users',
+    () => $fetch('/users', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        query: {
+            search: searchQuery.value
+        },
+        baseURL: 'http://127.0.0.1:8080'
+    }),
+    {
+        watch: searchQuery
+    }
+)
+
+const { data: currentArticleAccessUsers } = await useAsyncData(
+    'edit-access',
+    () => $fetch('/admin/categories/edit-access', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        query: {
+            category: currentCategoryId.value
+        },
+        baseURL: 'http://127.0.0.1:8080'
+    }),
+    {
+        watch: currentCategoryId
+    }
+)
+
+async function addUserToCategory() {
+    const formData = new FormData()
+    formData.append('category_id', currentCategoryId.value)
+    formData.append('user_id', searchQuery.value)
+
+    const res = await $fetch(`/admin/categories/edit-access`, 
+    {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: formData,
+        baseURL: 'http://127.0.0.1:8080'
+    })
+
+    searchQuery.value = ''
+    refreshNuxtData()
+}
 
 </script>
 
