@@ -19,7 +19,7 @@
                     <NuxtLink :to="`/creator/articles/new?initial-category-id=${currentCategoryId}`" class="btn btn-primary btn-sm text-white">
                         <span class="bi-plus-lg me-1"></span>Artikel</NuxtLink>
                 </div>
-                <input class="form-control mb-3" list="newUserOptions" placeholder="Cari artikel...">
+                <input class="form-control mb-3" v-model="searchQuery" placeholder="Cari artikel...">
 
                 <div class="overflow-y-scroll" style="height: 87%">
                     <div v-for="article in articles">
@@ -38,6 +38,7 @@ const apiKey = data.value.apiKey
 const categories = data.value.user.has_article_edit_access
 
 const currentCategoryId = ref(categories[0].id);
+const searchQuery = ref('');
 const currentCategory = ref(categories.find(category => category.id == currentCategoryId.value))
 
 const { data: articles } = await useAsyncData(
@@ -47,10 +48,16 @@ const { data: articles } = await useAsyncData(
         headers: {
             'Authorization': `Bearer ${apiKey}`
         },
+        query: {
+            search: searchQuery.value
+        },
         baseURL: 'http://127.0.0.1:8080'
     }),
     {
-        watch: currentCategoryId
+        watch: [
+            currentCategoryId,
+            searchQuery
+        ]
     }
 )
 
