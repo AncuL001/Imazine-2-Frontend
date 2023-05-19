@@ -61,7 +61,7 @@
                                 <div class="fw-light">{{ user.npm }}</div>
                             </div>
                         </div>
-                        <NuxtLink :to="`#${user.id}`" class="bi-x text-danger" style="font-size: 1.5em;"></NuxtLink>
+                        <span @click="deleteUserFromCategory(user.id)" class="bi-x text-danger" style="font-size: 1.5em;"></span>
                     </div>
                 </div>
             </div>
@@ -143,6 +143,24 @@ async function addUserToCategory() {
     refreshNuxtData()
 }
 
+async function deleteUserFromCategory(userId) {
+    const formData = new FormData()
+    formData.append('category_id', currentCategoryId.value)
+    formData.append('user_id', userId)
+
+    const res = await $fetch(`/admin/categories/edit-access`, 
+    {
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: formData,
+        baseURL: 'http://127.0.0.1:8080'
+    })
+
+    searchQuery.value = ''
+    refreshNuxtData()
+}
 </script>
 
 <style lang="scss" scoped>
