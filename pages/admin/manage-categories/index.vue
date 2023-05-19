@@ -18,11 +18,11 @@
                     <span @click="currentCategoryId = category.id" replace class="category-label d-flex gx-5">
                         <div class="me-1">{{ category.name }}</div>
                         <div class="dropend">
-                            <span class="category-control bi-pencil-fill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
+                            <span @click="renameCategoryName = category.name" class="category-control bi-pencil-fill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
                             <div class="dropdown-menu p-2" style="min-width: 300px;">
                                 <div class="form-group d-flex gap-2">
-                                    <input type="text" class="form-control" id="dropdownFormNpm" placeholder="Nama baru..." :value="category.name">
-                                    <button type="button" class="bi-pencil-fill btn btn-primary text-white p-2"></button>
+                                    <input v-model="renameCategoryName" type="text" class="form-control" id="dropdownFormNpm" placeholder="Nama baru...">
+                                    <button @click="renameCategory(category.id)" type="button" class="bi-pencil-fill btn btn-primary text-white p-2"></button>
                                 </div>
                             </div>
                         </div>
@@ -88,6 +88,11 @@ const currentCategory = ref(categories.value.find(category => category.id == cur
 
 watch(currentCategoryId, (newCategoryId, oldCategoryId) => {
     currentCategory.value = categories.value.find(category => category.id == newCategoryId);
+    searchQuery.value = ''
+});
+
+watch(categories, (newCategories, oldCategories) => {
+    currentCategory.value = categories.value.find(category => category.id == currentCategoryId.value);
     searchQuery.value = ''
 });
 
@@ -162,6 +167,24 @@ async function deleteUserFromCategory(userId) {
     searchQuery.value = ''
     refreshNuxtData()
 }
+
+const renameCategoryName = ref('')
+async function renameCategory(categoryId) {
+    const formData = new FormData()
+    formData.append('name', renameCategoryName.value)
+
+    const res = await $fetch(`/categories/${categoryId}`, 
+    {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: formData,
+        baseURL: 'http://127.0.0.1:8080'
+    })
+    refreshNuxtData()
+}
+
 </script>
 
 <style lang="scss" scoped>
