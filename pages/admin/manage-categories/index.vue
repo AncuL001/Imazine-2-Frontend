@@ -55,7 +55,8 @@
                 <div v-for="user in currentArticleAccessUsers">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <div class="row m-0">
-                            <img class="circle my-auto" :src="user.profile_picture_link">
+                            <img v-if="user.profile_picture_link != ''" class="circle my-auto" :src="user.profile_picture_link">
+                            <img v-else class="circle my-auto" src="~/assets/placeholder_profile_pic.jpg">
                             <div class="col lh-sm">
                                 <div>{{ user.name }}</div>
                                 <div class="fw-light">{{ user.npm }}</div>
