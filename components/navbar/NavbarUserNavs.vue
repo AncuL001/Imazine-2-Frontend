@@ -5,7 +5,7 @@
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><NuxtLink class="dropdown-item" to="/admin/manage-users">Manage Users</NuxtLink></li>
-                <li><NuxtLink class="dropdown-item" to="/admin/manage-categories">Manage Categories</NuxtLink></li>
+                <li><NuxtLink class="dropdown-item" to="/admin/categories">Manage Categories</NuxtLink></li>
             </ul>
         </li>
         <li class="nav-item dropdown  my-auto" v-if="data.user.has_article_edit_access.length > 0 || false">
