@@ -5,11 +5,11 @@
                 <div class="d-flex">
                     <h2 class="me-2">Kategori</h2>
                     <div class="dropend">
-                        <span class="btn-icon bi-plus-lg" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
+                        <span @click="categoryName = ''" class="btn-icon bi-plus-lg" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
                         <div class="dropdown-menu p-2" style="min-width: 300px;">
                             <div class="form-group d-flex gap-2">
-                                <input type="text" class="form-control" id="newCategoryForm" placeholder="Kategori baru...">
-                                <button type="button" class="bi-plus-lg btn btn-primary text-white p-2"></button>
+                                <input v-model="categoryName" type="text" class="form-control" id="newCategoryForm" placeholder="Kategori baru...">
+                                <button @click="newCategory()" type="button" class="bi-plus-lg btn btn-primary text-white p-2"></button>
                             </div>
                         </div>
                     </div>
@@ -18,10 +18,10 @@
                     <span @click="currentCategoryId = category.id" replace class="category-label d-flex gx-5">
                         <div class="me-1">{{ category.name }}</div>
                         <div class="dropend">
-                            <span @click="renameCategoryName = category.name" class="category-control bi-pencil-fill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
+                            <span @click="categoryName = category.name" class="category-control bi-pencil-fill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
                             <div class="dropdown-menu p-2" style="min-width: 300px;">
                                 <div class="form-group d-flex gap-2">
-                                    <input v-model="renameCategoryName" type="text" class="form-control" id="dropdownFormNpm" placeholder="Nama baru...">
+                                    <input v-model="categoryName" type="text" class="form-control" id="dropdownFormNpm" placeholder="Nama baru...">
                                     <button @click="renameCategory(category.id)" type="button" class="bi-pencil-fill btn btn-primary text-white p-2"></button>
                                 </div>
                             </div>
@@ -168,10 +168,10 @@ async function deleteUserFromCategory(userId) {
     refreshNuxtData()
 }
 
-const renameCategoryName = ref('')
+const categoryName = ref('')
 async function renameCategory(categoryId) {
     const formData = new FormData()
-    formData.append('name', renameCategoryName.value)
+    formData.append('name', categoryName.value)
 
     const res = await $fetch(`/categories/${categoryId}`, 
     {
@@ -185,6 +185,21 @@ async function renameCategory(categoryId) {
     refreshNuxtData()
 }
 
+async function newCategory() {
+    const formData = new FormData()
+    formData.append('name', categoryName.value)
+
+    const res = await $fetch(`/categories`, 
+    {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: formData,
+        baseURL: 'http://127.0.0.1:8080'
+    })
+    refreshNuxtData()
+}
 </script>
 
 <style lang="scss" scoped>
