@@ -4,7 +4,7 @@
                 Admin
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><NuxtLink class="dropdown-item" to="/admin/manage-users">Manage Users</NuxtLink></li>
+                <li><NuxtLink class="dropdown-item" to="/admin/users">Manage Users</NuxtLink></li>
                 <li><NuxtLink class="dropdown-item" to="/admin/categories">Manage Categories</NuxtLink></li>
             </ul>
         </li>
@@ -22,6 +22,7 @@
                 <img v-else class="profile-picture" src="~/assets/placeholder_profile_pic.jpg" />
             </span>
             <ul class="dropdown-menu dropdown-menu-end">
+                <li><NuxtLink to="/profile" class="dropdown-item">Profil</NuxtLink></li>
                 <li><span @click="logout" class="dropdown-item">Logout</span></li>
             </ul>
         </li>
