@@ -78,7 +78,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="d-flex mb-3" style="justify-content: center;">
-                                        <img v-if="currentEditUser && currentEditUser.profile_picture_link != ''" class="big-circle my-auto" :src="user.profile_picture_link">
+                                        <img v-if="currentEditUser && currentEditUser.profile_picture_link != ''" class="big-circle my-auto" :src="currentEditUser.profile_picture_link">
                                         <img v-else class="big-circle my-auto" src="~/assets/placeholder_profile_pic.jpg">
                                     </div>
                                     <div class="mb-3 row">
