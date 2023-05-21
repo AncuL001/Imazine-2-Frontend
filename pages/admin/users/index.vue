@@ -45,7 +45,31 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary text-white bi-plus-lg">csv</button>
+                <button class="btn btn-primary text-white bi-plus-lg" data-bs-toggle="modal" :data-bs-target="`#csvModal`">csv</button>
+                <div class="modal fade" :id="`csvModal`" tabindex="-1" aria-labelledby="csvModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="csvModalLabel">Tambahkan Pengguna</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <label for="formFile" class="form-label">File CSV</label>
+                                <input @change="updateCsvFile" class="form-control" type="file" id="formFile" aria-describedby="csvHelpBlock">
+                                <div id="csvHelpBlock" class="form-text">
+                                    File csv mengikuti <a class="text-primary" href="/_nuxt/assets/new_users_template.csv">template ini</a>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div data-bs-dismiss="modal">
+                                    <button @click="newUsersCsv" type="button" class="btn btn-primary text-white">
+                                        Tambah
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="px-2" style="height: 100%">
@@ -166,6 +190,32 @@ async function newUser() {
         body: formData,
         baseURL: 'http://127.0.0.1:8080'
     })
+    refreshNuxtData()
+}
+
+const csvFile = ref(null)
+function updateCsvFile(event) {
+    csvFile.value = event.target.files[0]
+}
+
+async function newUsersCsv() {
+    if (csvFile.value == null) {
+        return
+    }
+
+    const formData = new FormData()
+    formData.append('file', csvFile.value)
+
+    const res = await $fetch(`/admin/users/add-csv`, 
+    {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${apiKey}`
+        },
+        body: formData,
+        baseURL: 'http://127.0.0.1:8080'
+    })
+    csvFile.value = null
     refreshNuxtData()
 }
 
