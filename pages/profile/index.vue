@@ -87,6 +87,8 @@ async function uploadProfilePicture(event) {
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/',
     })
+
+    window.location.reload()
 }
 
 const newEmail = ref('')
