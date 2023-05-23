@@ -26,7 +26,7 @@ export default defineNuxtConfig({
     api: {
       isEnabled: true,
       methods: [
-        'get',
+        'get', 'patch'
       ]
     }
   },
