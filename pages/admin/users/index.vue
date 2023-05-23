@@ -150,7 +150,7 @@ const { data: searchUsers } = await useAsyncData(
         query: {
             search: searchQuery.value
         },
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     }),
     {
         watch: searchQuery
@@ -188,7 +188,7 @@ async function newUser() {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
     refreshNuxtData()
 }
@@ -213,7 +213,7 @@ async function newUsersCsv() {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
     csvFile.value = null
     refreshNuxtData()
@@ -231,7 +231,7 @@ async function editUser(userId) {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
     refreshNuxtData()
 }

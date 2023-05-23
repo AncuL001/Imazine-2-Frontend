@@ -39,7 +39,7 @@ const {data: article} = await useFetch(`/articles/${id}`, {
     headers: {
         'Authorization': `Bearer ${apiKey}`
     },
-    baseURL: 'http://127.0.0.1:8080'
+    baseURL: 'https://21337.live.reon.my.id/'
 })
 
 const convertedContent = md.render(article.value.markdown_content)

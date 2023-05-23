@@ -32,7 +32,7 @@ if (data.value.isLoggedIn){
       headers: {
         'Authorization': `Bearer ${apiKey}`
       },
-      baseURL: 'http://127.0.0.1:8080'
+      baseURL: 'https://21337.live.reon.my.id/'
     })
 
     articles = articlesData
@@ -42,7 +42,7 @@ if (data.value.isLoggedIn){
       headers: {
         'Authorization': `Bearer ${apiKey}`
       },
-      baseURL: 'http://127.0.0.1:8080'
+      baseURL: 'https://21337.live.reon.my.id/'
     })
 
     categories = categoriesData

@@ -85,7 +85,7 @@ async function uploadProfilePicture(event) {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080',
+        baseURL: 'https://21337.live.reon.my.id/',
     })
 }
 
@@ -102,7 +102,7 @@ async function updateEmail(event) {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
 
     newEmail.value = ''
@@ -125,7 +125,7 @@ async function updatePassword(event) {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
 
     oldPassword.value = ''

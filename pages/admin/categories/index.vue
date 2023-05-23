@@ -79,7 +79,7 @@ const {data: categories} = await useFetch('/categories', {
   headers: {
     'Authorization': `Bearer ${apiKey}`
   },
-  baseURL: 'http://127.0.0.1:8080'
+  baseURL: 'https://21337.live.reon.my.id/'
 })
 
 const currentCategoryId = ref(categories.value[0].id);
@@ -106,7 +106,7 @@ const { data: searchUsers } = await useAsyncData(
         query: {
             search: searchQuery.value
         },
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     }),
     {
         watch: searchQuery
@@ -123,7 +123,7 @@ const { data: currentArticleAccessUsers } = await useAsyncData(
         query: {
             category: currentCategoryId.value
         },
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     }),
     {
         watch: currentCategoryId
@@ -142,7 +142,7 @@ async function addUserToCategory() {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
 
     searchQuery.value = ''
@@ -161,7 +161,7 @@ async function deleteUserFromCategory(userId) {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
 
     searchQuery.value = ''
@@ -180,7 +180,7 @@ async function renameCategory(categoryId) {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
     refreshNuxtData()
 }
@@ -196,7 +196,7 @@ async function newCategory() {
             'Authorization': `Bearer ${apiKey}`
         },
         body: formData,
-        baseURL: 'http://127.0.0.1:8080'
+        baseURL: 'https://21337.live.reon.my.id/'
     })
     refreshNuxtData()
 }
