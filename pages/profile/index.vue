@@ -71,9 +71,8 @@
 </template>
 
 <script setup>
-const { data } = await useFetch('/api/session')
-const user = data.value.user
-const apiKey = data.value.apiKey
+const auth = useAuth()
+const { user, apiKey } = storeToRefs(auth)
 
 async function uploadProfilePicture(event) {
     const formData = new FormData()
@@ -82,13 +81,14 @@ async function uploadProfilePicture(event) {
     const res = await $fetch(`/profile/profile-picture`, { 
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/',
     })
 
-    window.location.reload()
+    auth.renewUserData()
+    refreshNuxtData()
 }
 
 const newEmail = ref('')
@@ -101,7 +101,7 @@ async function updateEmail(event) {
     {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'
@@ -124,7 +124,7 @@ async function updatePassword(event) {
     {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'

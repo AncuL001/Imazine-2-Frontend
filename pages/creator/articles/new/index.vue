@@ -33,7 +33,7 @@
                     </div>
                     <div class="col-auto">
                         <select v-model="categoryId" class="form-select" aria-label="Default select example">
-                            <option v-for="category in categories" :value="`${category.id}`">{{ category.name }}</option>
+                            <option v-for="category in user.has_article_edit_access" :value="`${category.id}`">{{ category.name }}</option>
                         </select>
                     </div>
                 </div>
@@ -82,8 +82,8 @@ export default {
             this.imgUrl = URL.createObjectURL(this.img)
         },
         async createArticle(event) {
-            const { data } = await useFetch('/api/session')
-            const apiKey = data.value.apiKey
+            const auth = useAuth()
+            const { user, apiKey } = storeToRefs(auth)
 
             const formData = new FormData()
             formData.append('title', this.title)
@@ -94,7 +94,7 @@ export default {
             const { data: res, pending, refresh, error } = await useFetch('/articles', { 
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${apiKey}`
+                    'Authorization': `Bearer ${apiKey.value}`
                 },
                 body: formData,
                 baseURL: 'https://21337.live.reon.my.id/',
@@ -109,8 +109,8 @@ export default {
 <script setup>
 import MarkdownIt from 'markdown-it';
 
-const { data } = await useFetch('/api/session')
-const categories = data.value.user.has_article_edit_access
+const auth = useAuth()
+const { user, apiKey } = storeToRefs(auth)
 </script>
 
 <style lang="scss" scoped>

@@ -135,8 +135,8 @@
 </template>
 
 <script setup>
-const { data } = await useFetch('/api/session')
-const apiKey = data.value.apiKey
+const auth = useAuth()
+const { user, apiKey } = storeToRefs(auth)
 
 const searchQuery = ref('');
 
@@ -145,7 +145,7 @@ const { data: searchUsers } = await useAsyncData(
     () => $fetch('/users', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         query: {
             search: searchQuery.value
@@ -185,7 +185,7 @@ async function newUser() {
     {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'
@@ -210,7 +210,7 @@ async function newUsersCsv() {
     {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'
@@ -228,7 +228,7 @@ async function editUser(userId) {
     {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'

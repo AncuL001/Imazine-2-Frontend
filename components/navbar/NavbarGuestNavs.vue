@@ -25,10 +25,11 @@
 </template>
 
 <script setup>
+const auth = useAuth()
 async function login(event) {
     window.document.querySelectorAll('.dropdown-menu').forEach(function(dropdown) {
         dropdown.addEventListener('click', function(e) {
-            e.stopPropagation();
+            e.stopImmediatePropagation();
         });
     });
 
@@ -36,17 +37,26 @@ async function login(event) {
     formData.append('npm', npm.value)
     formData.append('password', password.value)
 
-    const { data, pending, refresh, error } = await useFetch('/api/login', { 
+    let statusCode
+    const data = await $fetch('https://21337.live.reon.my.id/login', { 
         method: 'POST', 
-        body: formData
+        body: formData,
+        async onResponse({ request, response, options }) {
+            statusCode = response.status
+        }
     })
+    .catch((error) => error.data)
 
-    if (error.value) {
-        errorMessage.value = error.value.data.message
+    if (statusCode !== 200) {
+        errorMessage.value = data.message
+        return
     }
-    else {
-        window.location.reload()
-    }
+
+    auth.isLoggedIn = true
+    auth.apiKey = data.apiKey
+    auth.user = data.user
+
+    refreshNuxtData()
 }
 
 const npm = ref('')

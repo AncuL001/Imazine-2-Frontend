@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data.isLoggedIn" class="row align-items-start gx-4">
+  <div v-if="isLoggedIn" class="row align-items-start gx-4">
     <div class="col">
       <div class="content-container p-5">
         <h1 class="pb-4">
@@ -11,7 +11,7 @@
     <HomePageCategorySidebar :categories="categories"/>
   </div>
   <!-- using v-else will cause the category sidebar above to disappear (somehow) -->
-  <div v-if="!data.isLoggedIn">
+  <div v-if="!isLoggedIn">
     <div class="content-container p-5">
       <h1 style="text-align: center;">
           Silakan masuk untuk melihat konten
@@ -21,32 +21,37 @@
 </template>
 
 <script setup>
-const { data } = await useFetch('/api/session')
-const apiKey = data.value.apiKey
-var articles;
-var categories;
+const auth = useAuth()
+const { isLoggedIn, apiKey } = storeToRefs(auth)
 
-if (data.value.isLoggedIn){
-  const {data: articlesData} = await useFetch('/articles', {
+const { data: articles } = await useAsyncData(
+  'articles',
+  () => $fetch('/articles', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey.value}`
       },
       baseURL: 'https://21337.live.reon.my.id/'
-    })
+    }),
+    {
+      watch: apiKey
+    }
+)
 
-    articles = articlesData
-
-    const {data: categoriesData} = await useFetch('/categories', {
+const { data: categories } = await useAsyncData(
+  'categories',
+  () => $fetch('/categories', {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey.value}`
       },
       baseURL: 'https://21337.live.reon.my.id/'
-    })
+    }),
+    {
+      watch: apiKey
+    }
+)
 
-    categories = categoriesData
-}
 </script>
 
 <style lang="scss" scoped>

@@ -71,13 +71,13 @@
 </template>
 
 <script setup>
-const { data } = await useFetch('/api/session')
-const apiKey = data.value.apiKey
+const auth = useAuth()
+const { user, apiKey } = storeToRefs(auth)
 
 const {data: categories} = await useFetch('/categories', {
   method: 'GET',
   headers: {
-    'Authorization': `Bearer ${apiKey}`
+    'Authorization': `Bearer ${apiKey.value}`
   },
   baseURL: 'https://21337.live.reon.my.id/'
 })
@@ -101,7 +101,7 @@ const { data: searchUsers } = await useAsyncData(
     () => $fetch('/users', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         query: {
             search: searchQuery.value
@@ -118,7 +118,7 @@ const { data: currentArticleAccessUsers } = await useAsyncData(
     () => $fetch('/admin/categories/edit-access', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         query: {
             category: currentCategoryId.value
@@ -139,7 +139,7 @@ async function addUserToCategory() {
     {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'
@@ -158,7 +158,7 @@ async function deleteUserFromCategory(userId) {
     {
         method: 'DELETE',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'
@@ -177,7 +177,7 @@ async function renameCategory(categoryId) {
     {
         method: 'PUT',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'
@@ -193,7 +193,7 @@ async function newCategory() {
     {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         body: formData,
         baseURL: 'https://21337.live.reon.my.id/'

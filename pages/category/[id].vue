@@ -15,13 +15,13 @@
 <script setup>
 const { id } = useRoute().params
 
-const { data } = await useFetch('/api/session')
-const apiKey = data.value.apiKey
+const auth = useAuth()
+const { user, apiKey } = storeToRefs(auth)
 
 const {data: articles} = await useFetch('/articles?category=' + id, {
   method: 'GET',
   headers: {
-    'Authorization': `Bearer ${apiKey}`
+    'Authorization': `Bearer ${apiKey.value}`
   },
   baseURL: 'https://21337.live.reon.my.id/'
 })
@@ -29,7 +29,7 @@ const {data: articles} = await useFetch('/articles?category=' + id, {
 const {data: categories} = await useFetch('/categories', {
   method: 'GET',
   headers: {
-    'Authorization': `Bearer ${apiKey}`
+    'Authorization': `Bearer ${apiKey.value}`
   },
   baseURL: 'https://21337.live.reon.my.id/'
 })

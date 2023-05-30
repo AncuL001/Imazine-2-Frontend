@@ -65,14 +65,14 @@ export default {
     async setup() {
         const { id } = useRoute().params
 
-        const { data } = await useFetch('/api/session')
-        const categories = data.value.user.has_article_edit_access
-        const apiKey = data.value.apiKey
+        const auth = useAuth()
+        const { user, apiKey } = storeToRefs(auth)
+        const categories = user.value.has_article_edit_access
 
         const {data: article} = await useFetch(`/articles/${id}`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${apiKey}`
+                'Authorization': `Bearer ${apiKey.value}`
             },
             baseURL: 'https://21337.live.reon.my.id/'
         })
@@ -106,8 +106,8 @@ export default {
             this.imgUrl = URL.createObjectURL(this.img)
         },
         async editArticle(event) {
-            const { data } = await useFetch('/api/session')
-            const apiKey = data.value.apiKey
+            const auth = useAuth()
+            const { user, apiKey } = storeToRefs(auth)
 
             const formData = new FormData()
             formData.append('title', this.title)
@@ -118,7 +118,7 @@ export default {
             const { data: res, pending, refresh, error } = await useFetch(`/articles/${this.id}`, { 
                 method: 'PUT',
                 headers: {
-                    'Authorization': `Bearer ${apiKey}`
+                    'Authorization': `Bearer ${apiKey.value}`
                 },
                 body: formData,
                 baseURL: 'https://21337.live.reon.my.id/',

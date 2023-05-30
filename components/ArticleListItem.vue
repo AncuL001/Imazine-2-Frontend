@@ -42,18 +42,19 @@
 </template>
 
 <script setup>
+const auth = useAuth()
+const { apiKey } = storeToRefs(auth)
+
 const { article } = defineProps(['article'])
 const createdAt = new Date(article.created_at).toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
 
 async function deleteArticle(articleId) {
-    const data = await $fetch('/api/session')
-    const apiKey = data.apiKey
 
     const res = await $fetch(`/articles/${articleId}`, 
     {
         method: 'DELETE',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         baseURL: 'https://21337.live.reon.my.id/'
     })

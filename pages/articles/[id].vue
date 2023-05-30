@@ -31,13 +31,13 @@ const md = new MarkdownIt;
 
 const { convertDatetime } = useDatetimeConverter();
 
-const { data } = await useFetch('/api/session')
-const apiKey = data.value.apiKey
+const auth = useAuth()
+const { user, apiKey } = storeToRefs(auth)
 
 const {data: article} = await useFetch(`/articles/${id}`, {
     method: 'GET',
     headers: {
-        'Authorization': `Bearer ${apiKey}`
+        'Authorization': `Bearer ${apiKey.value}`
     },
     baseURL: 'https://21337.live.reon.my.id/'
 })

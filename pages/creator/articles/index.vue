@@ -3,7 +3,7 @@
         <div class="category-card">
             <div class="content-container p-4">
                 <h2 class="me-2">Kategori</h2>
-                <div v-for="category in categories" :id="category.id">
+                <div v-for="category in user.has_article_edit_access" :id="category.id">
                     <span @click="currentCategoryId = category.id" replace class="category-label d-flex gx-5">
                         <div class="me-1">{{ category.name }}</div>
                     </span>
@@ -32,17 +32,15 @@
 </template>
 
 <script setup>
-const { data } = await useFetch('/api/session')
-const apiKey = data.value.apiKey
+const auth = useAuth()
+const { user, apiKey } = storeToRefs(auth)
 
-const categories = data.value.user.has_article_edit_access
-
-const currentCategoryId = ref(categories[0].id);
+const currentCategoryId = ref(user.value.has_article_edit_access[0].id);
 const searchQuery = ref('');
-const currentCategory = ref(categories.find(category => category.id == currentCategoryId.value))
+const currentCategory = ref(user.value.has_article_edit_access.find(category => category.id == currentCategoryId.value))
 
 watch(currentCategoryId, (newCategoryId, oldCategoryId) => {
-    currentCategory.value = categories.find(category => category.id == newCategoryId);
+    currentCategory.value = user.value.has_article_edit_access.find(category => category.id == newCategoryId);
     searchQuery.value = ''
 });
 
@@ -51,7 +49,7 @@ const { data: articles } = await useAsyncData(
     () => $fetch(`/creators/articles/${currentCategoryId.value}`, {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${apiKey}`
+            'Authorization': `Bearer ${apiKey.value}`
         },
         query: {
             search: searchQuery.value
