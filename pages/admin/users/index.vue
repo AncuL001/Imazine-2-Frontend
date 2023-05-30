@@ -57,7 +57,7 @@
                                 <label for="formFile" class="form-label">File CSV</label>
                                 <input @change="updateCsvFile" class="form-control" type="file" id="formFile" aria-describedby="csvHelpBlock">
                                 <div id="csvHelpBlock" class="form-text">
-                                    File csv mengikuti <a class="text-primary" href="~/assets/new_users_template.csv">template ini</a>
+                                    File csv mengikuti <NuxtLink class="text-primary" to="https://gist.githubusercontent.com/AncuL001/b8172dbabcb1ad56f9d332dadebba034/raw/add8be44401a9a556ed7851688e09da3eb8971ba/new_users_template.csv">template ini</NuxtLink>
                                 </div>
                             </div>
                             <div class="modal-footer">
