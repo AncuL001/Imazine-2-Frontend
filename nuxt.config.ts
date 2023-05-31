@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/google-fonts',
     '@sidebase/nuxt-session',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt'
   ],
   plugins: [
     '@/plugins/bootstrap.client.ts',

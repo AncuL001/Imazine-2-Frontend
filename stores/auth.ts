@@ -20,5 +20,6 @@ export const useAuth = defineStore({
             this.user = response as any
             console.log(this.user)
         }
-    }
+    },
+    persist: true
 })
