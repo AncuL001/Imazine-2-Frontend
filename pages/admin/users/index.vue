@@ -117,6 +117,13 @@
                                         <input v-model="currentEditUserNpm" type="text" class="form-control" id="updateUserNpm">
                                         </div>
                                     </div>
+                                    <div class="row pt-2">
+                                        <div class="col-sm-2"></div>
+                                        <div class="col-sm-10">
+                                            <input v-model="currentEditUserIsAdmin" type="checkbox" class="form-check-input" id="updateUserIsAdmin">
+                                            <label for="updateUserIsAdmin" class="col-check-label ps-2">Admin</label>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <div data-bs-dismiss="modal">
@@ -161,17 +168,20 @@ const currentEditUser = ref(null);
 const currentEditUserName = ref('');
 const currentEditUserNpm = ref('');
 const currentEditUserEmail = ref('');
+const currentEditUserIsAdmin = ref(false);
 
 watch(currentEditUser, (newUser, oldUser) => {
     if (newUser == null) {
         currentEditUserName.value = '';
         currentEditUserNpm.value = '';
         currentEditUserEmail.value = '';
+        currentEditUserIsAdmin.value = false;
     }
     else {
         currentEditUserName.value = newUser.name;
         currentEditUserNpm.value = newUser.npm;
         currentEditUserEmail.value = newUser.email;
+        currentEditUserIsAdmin.value = newUser.is_admin;
     }
 })
 
@@ -223,6 +233,7 @@ async function editUser(userId) {
     const formData = new FormData()
     formData.append('name', currentEditUserName.value)
     formData.append('npm', currentEditUserNpm.value)
+    formData.append('isadmin', currentEditUserIsAdmin.value)
 
     const res = await $fetch(`/admin/users/${userId}`, 
     {
