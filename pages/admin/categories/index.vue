@@ -1,7 +1,7 @@
 <template>
     <div class="row align-items-start">
         <div class="category-card">
-            <div class="content-container p-4">
+            <div class="content-container-overflow p-4">
                 <div class="d-flex">
                     <h2 class="me-2">Kategori</h2>
                     <div class="dropend">
