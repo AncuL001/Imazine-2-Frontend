@@ -18,7 +18,6 @@ export const useAuth = defineStore({
             .catch((error) => error.data)
 
             this.user = response as any
-            console.log(this.user)
         }
     },
     persist: true
