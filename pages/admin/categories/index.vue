@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div v-for="category in categories" :id="category.id">
-                    <span @click="currentCategoryId = category.id" replace class="category-label d-flex gx-5">
+                    <span @click="currentCategoryId = category.id" replace class="category-label d-flex gx-5 mt-2 lh-sm">
                         <div class="me-1">{{ category.name }}</div>
                         <div class="dropend">
                             <span @click="categoryName = category.name" class="category-control bi-pencil-fill" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-offset="-16,6"></span>
