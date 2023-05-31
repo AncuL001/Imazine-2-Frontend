@@ -49,7 +49,7 @@ const { data: articles } = await useAsyncData(
     query: {
       page: page.value
     },
-    baseURL: 'http://localhost:8080',
+    baseURL: 'https://21337.live.reon.my.id/',
   }),
   {
     watch: [page, apiKey],
