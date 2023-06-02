@@ -30,6 +30,12 @@
                 <h2>Profil</h2>
             </div>
             <div class="col p-4">
+                <div class="row mb-3">
+                    <label for="newEmail" class="col-sm-3 col-form-label">Email</label>
+                    <div class="col-sm-5">
+                        <input type="text" readonly class="form-control-plaintext" id="newEmail" :value="user.email">
+                    </div>
+                </div>
                 <div class="row">
                     <label for="newEmail" class="col-sm-3 col-form-label">Email Baru</label>
                     <div class="col-sm-5">
@@ -108,6 +114,8 @@ async function updateEmail(event) {
     })
 
     newEmail.value = ''
+    auth.renewUserData()
+    refreshNuxtData()
 }
 
 const oldPassword = ref('')
