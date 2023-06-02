@@ -13,7 +13,7 @@
           <div class="my-auto">
             halaman {{ page }} dari {{ articles.pageCount }}
           </div>
-          <div v-show="page != articles.pageCount">
+          <div v-show="page < articles.pageCount">
             <button @click="page++" class="btn btn-primary rounded-5 text-white bi-chevron-right mx-2"></button>
           </div>
         </div>
