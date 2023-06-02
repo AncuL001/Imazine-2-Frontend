@@ -55,19 +55,19 @@
                 <div class="mb-5 row">
                     <label for="currentPassword" class="col-sm-3 col-form-label">Password Sekarang</label>
                     <div class="col-sm-5">
-                        <input v-model="oldPassword" type="text" class="form-control" id="currentPassword">
+                        <input v-model="oldPassword" type="password" class="form-control" id="currentPassword">
                     </div>
                 </div>
                 <div class="mb-3 row">
                     <label for="newPassword" class="col-sm-3 col-form-label">Password Baru</label>
                     <div class="col-sm-5">
-                        <input v-model="newPassword" type="text" class="form-control" id="newPassword">
+                        <input v-model="newPassword" type="password" class="form-control" id="newPassword">
                     </div>
                 </div>
                 <div class="row">
                     <label for="repeatNewPassword" class="col-sm-3 col-form-label">Ulangi Password Baru</label>
                     <div class="col-sm-5">
-                        <input v-model="repeatNewPassword" type="text" class="form-control" id="repeatNewPassword">
+                        <input v-model="repeatNewPassword" type="password" class="form-control" id="repeatNewPassword">
                         <button @click="updatePassword" class="btn btn-primary text-white mt-3">Update</button>
                     </div>
                 </div>
