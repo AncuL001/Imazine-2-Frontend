@@ -73,4 +73,8 @@ article {
     a {
         @extend .hl;
     }
+
+    img {
+        max-width: 100%;
+    }
 }
