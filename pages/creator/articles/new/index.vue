@@ -82,6 +82,8 @@ export default {
             this.imgUrl = URL.createObjectURL(this.img)
         },
         async createArticle(event) {
+            document.getElementById("toggle_div").style.display="block";
+
             const auth = useAuth()
             const { user, apiKey } = storeToRefs(auth)
 
@@ -100,6 +102,7 @@ export default {
                 baseURL: 'https://21337.live.reon.my.id/',
             })
 
+            document.getElementById("toggle_div").style.display="none";
             await navigateTo('/articles/' + res.value.id)
         }
     }
